@@ -1,13 +1,30 @@
-import { copyFileSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
+/**
+ * The Carry - LAUNCH.json propagator
+ * Copies LAUNCH.json from source bot directory to output directory.
+ */
 
-const BOT_DIR = process.env.MAKEFUN_BOT_DIR ?? '/bot';
-const OUTPUT_DIR = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
 
-mkdirSync(OUTPUT_DIR, { recursive: true });
+function propagateConfig(): void {
+    const sourceRoot = process.env.MAKEFUN_BOT_DIR ?? '.';
+    const destinationRoot = process.env.MAKEFUN_OUTPUT_DIR ?? 'out';
+
+    const sourcePath = path.resolve(sourceRoot, 'LAUNCH.json');
+    const resolvedDestDir = path.resolve(destinationRoot);
+    const destinationPath = path.join(resolvedDestDir, 'LAUNCH.json');
+
+    if (!fs.existsSync(resolvedDestDir)) {
+        fs.mkdirSync(resolvedDestDir, { recursive: true });
+    }
+
+    fs.copyFileSync(sourcePath, destinationPath);
+}
+
 try {
-  copyFileSync(join(BOT_DIR, 'LAUNCH.json'), join(OUTPUT_DIR, 'LAUNCH.json'));
-} catch (err) {
-  console.error(`LAUNCH.json could not be copied from ${BOT_DIR}: ${(err as Error).message}`);
-  process.exit(1);
+    propagateConfig();
+} catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    process.stderr.write(errorMessage + '\n');
+    process.exit(1);
 }
