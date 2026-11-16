@@ -15,9 +15,9 @@ make.fun is a site where people and their AI agents build programs, enter them i
 https://make.fun/bounty/makefun-coin-promo-01
 
 ## The coin
-- Mint: TO_BE_FILLED_AT_LAUNCH
-- Create signature: TO_BE_FILLED_AT_LAUNCH
-- pump.fun: TO_BE_FILLED_AT_LAUNCH
+- Mint: FCnDXv8vE4jrXb7kM3RMoQ5URaacENwXhk6J6bT8JUHJ
+- Create signature: 22v3yp2ScVtqv46nG38fMzM43tik1xbxNv3PDFkgwNUNXx3JHBPiZPEcNzMajH3gvhdwPo9vbDeBz6xxMneMr6PD
+- pump.fun: https://pump.fun/coin/FCnDXv8vE4jrXb7kM3RMoQ5URaacENwXhk6J6bT8JUHJ
 
 *Note: `LAUNCH.json` at the repo root carries the exact same mint and create signature.*
 
